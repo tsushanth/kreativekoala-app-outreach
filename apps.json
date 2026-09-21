@@ -1,0 +1,117 @@
+[
+  {
+    "key": "voxkey",
+    "name": "VoxKey",
+    "packageId": "com.voxkey.ime",
+    "playUrl": "https://play.google.com/store/apps/details?id=com.voxkey.ime",
+    "category": "voice dictation keyboard",
+    "oneLiner": "VoxKey is a voice dictation keyboard for Android with a Wispr-style floating bubble — talk anywhere you'd type, in any app.",
+    "targeting": {
+      "queries": [
+        "Android voice typing keyboard app review blog",
+        "best speech to text keyboard Android YouTube review",
+        "accessibility voice input Android app roundup"
+      ],
+      "subreddits": ["r/Android", "r/androidapps", "r/accessibility"]
+    }
+  },
+  {
+    "key": "pixora",
+    "name": "Pixora",
+    "packageId": "com.kreativekoala.pixora",
+    "playUrl": "https://play.google.com/store/apps/details?id=com.kreativekoala.pixora",
+    "category": "AI photo/image editing",
+    "oneLiner": "Pixora is an AI photo editing app for Android — on-device and AI-assisted edits without a subscription-only workflow.",
+    "targeting": {
+      "queries": [
+        "Android photo editing app review blog",
+        "AI photo editor app YouTube review Android",
+        "best free photo editing apps Android roundup"
+      ],
+      "subreddits": ["r/Android", "r/androidapps", "r/mobilephotography"]
+    }
+  },
+  {
+    "key": "gymlog",
+    "name": "GymLog",
+    "packageId": "com.kreativekoala.gymlog",
+    "playUrl": "https://play.google.com/store/apps/details?id=com.kreativekoala.gymlog",
+    "category": "fitness/workout logging",
+    "oneLiner": "GymLog is a simple, fast workout logging app for Android — log sets and track progress without a bloated fitness-platform sign-up.",
+    "targeting": {
+      "queries": [
+        "workout tracking app review blog",
+        "best gym log app Android YouTube review",
+        "fitness app roundup Android lightweight"
+      ],
+      "subreddits": ["r/Android", "r/androidapps", "r/fitness", "r/bodybuilding"]
+    }
+  },
+  {
+    "key": "simplyapply",
+    "name": "SimplyApply",
+    "storeName": "SimplyApply",
+    "url": "https://www.simplyappl.ai",
+    "packageId": "com.kreativekoala.elevatecareers",
+    "playUrl": "https://play.google.com/store/apps/details?id=com.kreativekoala.elevatecareers",
+    "category": "job search / application autofill",
+    "oneLiner": "SimplyApply (simplyappl.ai) autofills job applications on Greenhouse, Lever, Ashby and more from a saved profile, and aggregates live openings across thousands of companies.",
+    "targeting": {
+      "queries": [
+        "career advice blog job search tools roundup",
+        "job hunting YouTube channel app review",
+        "resume and job application tools newsletter"
+      ],
+      "subreddits": ["r/jobs", "r/careerguidance", "r/cscareerquestions"]
+    }
+  },
+  {
+    "key": "scribeai",
+    "name": "Scribe AI",
+    "packageId": "com.kreativekoala.scribeai",
+    "playUrl": "https://play.google.com/store/apps/details?id=com.kreativekoala.scribeai",
+    "category": "AI note-taking",
+    "oneLiner": "Scribe AI is an AI note-taking app for Android for capturing and organizing notes quickly.",
+    "targeting": {
+      "queries": [
+        "AI note taking app review blog",
+        "best note taking apps Android YouTube review",
+        "productivity app roundup note taking AI"
+      ],
+      "subreddits": ["r/Android", "r/androidapps", "r/productivity"]
+    }
+  },
+  {
+    "key": "meetingmind",
+    "name": "Meeting Mind",
+    "packageId": "com.kreativekoala.meetingmind",
+    "playUrl": "https://play.google.com/store/apps/details?id=com.kreativekoala.meetingmind",
+    "category": "meeting recording, transcription and Q&A",
+    "oneLiner": "Meeting Mind records meetings, transcribes them with AI, generates summaries, and lets you ask questions over your recordings.",
+    "targeting": {
+      "queries": [
+        "meeting transcription app review blog",
+        "AI meeting notes app YouTube review",
+        "remote work productivity tools newsletter"
+      ],
+      "subreddits": ["r/productivity", "r/androidapps", "r/remotework"]
+    }
+  },
+  {
+    "key": "vibebuild",
+    "name": "VibeBuild",
+    "storeName": "VibeCoder",
+    "packageId": "com.kreativekoala.vibecoder",
+    "playUrl": "https://play.google.com/store/apps/details?id=com.kreativekoala.vibecoder",
+    "category": "natural-language AI app builder",
+    "oneLiner": "VibeCoder (by Kreative Koala) lets you describe an app in natural language on your phone and have AI build and deploy it, no code required.",
+    "targeting": {
+      "queries": [
+        "no-code AI app builder review blog",
+        "vibe coding tool YouTube review",
+        "AI app generator roundup newsletter"
+      ],
+      "subreddits": ["r/nocode", "r/artificial", "r/SideProject"]
+    }
+  }
+]

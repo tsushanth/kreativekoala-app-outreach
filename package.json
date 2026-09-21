@@ -1,0 +1,15 @@
+{
+  "name": "kreativekoala-app-outreach",
+  "private": true,
+  "type": "module",
+  "description": "Mac mini harness: press/community discovery + outreach for Kreative Koala's Android apps. Writes into calldesktech's outreach tables (product='kreativekoala:<app>'); sending/approval reuses calldesktech's review queue and send guards.",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.76.1",
+    "cheerio": "^1.2.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  }
+}
