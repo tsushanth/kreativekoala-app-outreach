@@ -8,11 +8,11 @@
     <string>/bin/bash</string>
     <string>__HOME__/kreativekoala-outreach-harness/repo/harness/app-outreach/run_cycle.sh</string>
   </array>
-  <!-- Burst window: fires hourly so the ~15h of spare quota actually gets spent
-       today across all 7 apps. Once the burst window is over, change this to
-       StartCalendarInterval (once/day, like the other two mini harnesses) --
-       see README.md "After the burst window". -->
-  <key>StartInterval</key><integer>3600</integer>
+  <!-- Burst window: fires every 30 min so a large, soon-expiring quota window
+       actually gets spent across all 7 apps before it's gone. Once the burst
+       window is over, change this to StartCalendarInterval (once/day, like
+       the other two mini harnesses) -- see README.md "After the burst window". -->
+  <key>StartInterval</key><integer>1800</integer>
   <key>RunAtLoad</key><false/>
   <key>StandardOutPath</key><string>__HOME__/.kreativekoala-outreach/logs/launchagent.log</string>
   <key>StandardErrorPath</key><string>__HOME__/.kreativekoala-outreach/logs/launchagent.log</string>
