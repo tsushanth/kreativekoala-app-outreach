@@ -49,7 +49,20 @@ async function main(): Promise<number> {
   const db = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY, { auth: { persistSession: false } });
   const apps = loadApps();
   const only = process.env.OUTREACH_APP_KEY; // for testing one app at a time
-  const targets = only ? apps.filter((a) => a.key === only) : apps;
+  // Each app's search/enrich/research/draft stages can take several minutes
+  // (LLM web-search calls with up to 5-minute timeouts, run sequentially per
+  // query), and the whole cycle is bounded by a single wall-clock deadline
+  // (default 45 min) rather than a per-app budget. Processing apps.json in
+  // its fixed array order meant apps later in the list (scribeai,
+  // meetingmind, vibebuild) were consistently starved: earlier apps
+  // (voxkey, pixora, gymlog, simplyapply) always ran first and regularly
+  // consumed the whole deadline, so the loop's `if (stop()) break;` guard
+  // (line 65) tripped before the later apps ever got a turn — every run,
+  // forever. Rotate the starting position by run/day so every app
+  // periodically gets to run first and no app is permanently starved.
+  const dayNumber = Math.floor(Date.now() / 86_400_000);
+  const rotated = apps.length ? apps.slice(dayNumber % apps.length).concat(apps.slice(0, dayNumber % apps.length)) : apps;
+  const targets = only ? rotated.filter((a) => a.key === only) : rotated;
 
   const opts = {
     searchQueriesPerDay: clamp(process.env.OUTREACH_SEARCH_QUERIES_PER_APP, 6, 3),
