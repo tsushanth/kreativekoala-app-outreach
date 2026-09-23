@@ -100,11 +100,11 @@
   {
     "key": "vibebuild",
     "name": "VibeBuild",
-    "storeName": "VibeCoder",
+    "storeName": "VibeBuild",
     "packageId": "com.kreativekoala.vibecoder",
     "playUrl": "https://play.google.com/store/apps/details?id=com.kreativekoala.vibecoder",
     "category": "natural-language AI app builder",
-    "oneLiner": "VibeCoder (by Kreative Koala) lets you describe an app in natural language on your phone and have AI build and deploy it, no code required.",
+    "oneLiner": "VibeBuild (by Kreative Koala) lets you describe an app in natural language on your phone and have AI build and deploy it, no code required.",
     "targeting": {
       "queries": [
         "no-code AI app builder review blog",
