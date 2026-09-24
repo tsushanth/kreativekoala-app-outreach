@@ -1,6 +1,6 @@
 import { cliComplete, extractJson } from './llm';
 import type { AppConfig } from './apps';
-import { publicName, publicUrl } from './apps';
+import { publicName, publicUrl, platformNoun, platformFact } from './apps';
 import type { Dossier } from './research';
 
 // Drafts a short first-touch pitch email to a press/reviewer/community contact
@@ -21,10 +21,10 @@ export interface Draft {
   body: string;
 }
 
-const SYSTEM_PROMPT = `You write short, specific, honest first-touch pitch emails from the founders of Kreative Koala LLC to press, bloggers, YouTubers, or newsletter curators, about one of the company's Android apps.
+const systemPrompt = (app: AppConfig) => `You write short, specific, honest first-touch pitch emails from the founders of Kreative Koala LLC to press, bloggers, YouTubers, or newsletter curators, about one of the company's products (a ${platformNoun(app)}).
 
 Rules:
-- State ONLY the app facts given (name, one-liner, link). Never invent user counts, ratings, revenue, awards, or press coverage.
+- State ONLY the app facts given (name, one-liner, platform, link). Describe the product only as the platform fact says (never call a web app an Android/iOS/mobile app). Never invent user counts, ratings, revenue, awards, or press coverage.
 - Personalize with one concrete detail about the recipient's own site/channel/coverage, without flattery.
 - One clear, low-friction ask: review it, mention it, or just try it — never demand coverage.
 - Offer to answer questions or provide more info (screenshots, a build) if useful; do not promise a specific promo code or payment.
@@ -55,6 +55,7 @@ export function draftPitchEmail(input: DraftInput, app: AppConfig): Draft {
     '',
     `App facts you may use (and nothing else):`,
     `- ${publicName(app)}: ${app.oneLiner}`,
+    `- ${platformFact(app)}`,
     `- Category: ${app.category}`,
     `- Link: ${publicUrl(app)}`,
   ]
@@ -62,7 +63,7 @@ export function draftPitchEmail(input: DraftInput, app: AppConfig): Draft {
     .join('\n');
 
   const text = cliComplete(
-    `${SYSTEM_PROMPT}\n\n${userPrompt}\n\nReply with ONLY a JSON object {"subject": string, "body": string}. Body: plain text, 90-140 words, 2-3 short paragraphs, no greeting name guess if unsure (start with "Hi there," instead). No sign-off, no links beyond the app link, no footer. No markdown fences, no commentary.`,
+    `${systemPrompt(app)}\n\n${userPrompt}\n\nReply with ONLY a JSON object {"subject": string, "body": string}. Body: plain text, 90-140 words, 2-3 short paragraphs, no greeting name guess if unsure (start with "Hi there," instead). No sign-off, no links beyond the app link, no footer. No markdown fences, no commentary.`,
     { maxTurns: 2 },
   );
   const parsed = extractJson<Draft>(text, 'object');

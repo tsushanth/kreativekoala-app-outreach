@@ -11,6 +11,8 @@ export interface AppConfig {
   url?: string;
   packageId: string;
   playUrl: string;
+  // 'android' (default) = a Google Play app; 'web' = a website/web app only (no store app).
+  platform?: 'android' | 'web';
   category: string;
   oneLiner: string;
   targeting: { queries: string[]; subreddits: string[] };
@@ -34,4 +36,16 @@ export function publicName(app: AppConfig): string {
 }
 export function publicUrl(app: AppConfig): string {
   return app.url ?? app.playUrl;
+}
+
+// How to describe the product in prompts. Every prompt used to hard-code
+// "Android app", which made web-only products (e.g. SimplyApply) get pitched
+// as Android apps.
+export function platformNoun(app: AppConfig): string {
+  return app.platform === 'web' ? 'web app' : 'Android app';
+}
+export function platformFact(app: AppConfig): string {
+  return app.platform === 'web'
+    ? 'Platform: web app used in the browser at the link below. There is NO Android, iOS or mobile app; never say or imply one exists.'
+    : 'Platform: Android app (Google Play).';
 }

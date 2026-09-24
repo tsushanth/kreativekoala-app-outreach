@@ -1,7 +1,7 @@
 import { cliComplete, extractJson } from './llm';
 import { hostOf } from './findDomain';
 import { politeFetchText } from './http';
-import type { AppConfig } from './apps';
+import { platformNoun, type AppConfig } from './apps';
 
 // Finds press/reviewer/community contacts for one app: tech/category blogs,
 // YouTubers who review this kind of app, niche newsletters, subreddit/community
@@ -23,7 +23,7 @@ const SKIP_HOSTS = [
 
 const PROMPT = (query: string, app: AppConfig) => `Search the web for: ${query}
 
-I'm looking for press/media outlets, independent bloggers, YouTubers, or newsletter curators who write about ${app.category} apps and might want to review or mention a new Android app called ${app.name} (${app.oneLiner}). I am NOT looking for the app stores themselves, competing apps, or big generic tech news sites with no reviewer contact.
+I'm looking for press/media outlets, independent bloggers, YouTubers, or newsletter curators who write about ${app.category} apps and might want to review or mention a new ${platformNoun(app)} called ${app.name} (${app.oneLiner}). I am NOT looking for the app stores themselves, competing apps, or big generic tech news sites with no reviewer contact.
 
 Return ONLY a JSON array (at most 10 items) of objects with keys: name (the outlet/creator/newsletter name), website (their own homepage or channel/about page URL, taken from the search results), location (if shown, else null), blurb (one factual sentence about what they cover, from their own site). Only include ones you actually saw in the search results. Use at most 4 web searches, then answer immediately. No commentary, no markdown fences.`;
 

@@ -52,6 +52,7 @@
     "name": "SimplyApply",
     "storeName": "SimplyApply",
     "url": "https://www.simplyappl.ai",
+    "platform": "web",
     "packageId": "com.kreativekoala.elevatecareers",
     "playUrl": "https://play.google.com/store/apps/details?id=com.kreativekoala.elevatecareers",
     "category": "job search / application autofill",
