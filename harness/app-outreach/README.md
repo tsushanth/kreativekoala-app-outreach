@@ -34,8 +34,9 @@ so they are never drafted.
 ## Env (`~/.kreativekoala-outreach/env`, chmod 600)
 `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `OPENROUTER_API_KEY` (required — get from openrouter.ai/keys).
 Optional: `OUTREACH_QUALIFY_BATCH`, `OUTREACH_QUALIFY_CONCURRENCY`, `OUTREACH_FETCH_TIMEOUT`,
+`OUTREACH_MAX_SITE_CHARS` (default 8000, max 20000 — how much of the homepage to send to the LLM),
 `OUTREACH_DEADLINE_MIN`, `OUTREACH_QUALIFY_APP` (single app key), `OUTREACH_CLI_MODEL`
-(default `anthropic/claude-3.5-sonnet`).
+(default `google/gemini-2.0-flash-001`; also good: `openai/gpt-4o-mini`, `anthropic/claude-3.5-haiku`).
 
 If `OPENROUTER_API_KEY` is absent, the harness falls back to the `claude` CLI (set `CLAUDE_BIN` if
 it's not on PATH, e.g. `CLAUDE_BIN=/Users/you/.local/bin/claude`).

@@ -36,6 +36,7 @@ const BATCH = clampInt(process.env.OUTREACH_QUALIFY_BATCH, 200, 50);
 const DEADLINE_MS = clampInt(process.env.OUTREACH_DEADLINE_MIN, 120, 45) * 60_000;
 const CONCURRENCY = clampInt(process.env.OUTREACH_QUALIFY_CONCURRENCY, 8, 4);
 const FETCH_TIMEOUT = clampInt(process.env.OUTREACH_FETCH_TIMEOUT, 30_000, 12_000);
+const MAX_SITE_CHARS = clampInt(process.env.OUTREACH_MAX_SITE_CHARS, 20_000, 8_000);
 const dryRun = process.env.DRY_RUN === '1';
 const ONLY_APP = process.env.OUTREACH_QUALIFY_APP || '';
 
@@ -96,13 +97,15 @@ async function politeFetchText(url: string, timeoutMs: number): Promise<{ ok: bo
 /* ------------------------------------------------------------------ */
 // Research LLM call (adapted from research.ts but async, using apiComplete)
 
-const LOOKS_LIKE_MEDIA = /(review|blog|editor|press|contact|subscribe|newsletter|channel|about us|write for us|submission|youtube)/i;
+// Stricter pre-filter: only even call the LLM if the page looks like it could be a media outlet.
+const LOOKS_LIKE_MEDIA = /\b(blog|editor|press|news|review|writer|journalist|magazine|podcast|newsletter|youtuber|channel|subscribe|about us|contact us|write for us|submission|guest post|media kit|press kit|coverage|interview|spotlight|feature)\b/i;
+const MUST_NOT_BE = /\b(app store|google play|download now|buy now|shopping cart|checkout|pricing|demo request|get started free|sign up|login|terms of service|privacy policy)\b/i;
 
 function makeResearchPrompt(siteText: string, lead: LeadRow, app: AppConfig): string {
   const name = lead.company_name;
   const domain = lead.domain || '';
   const desc = lead.description || '';
-  const text = (siteText || '').slice(0, 20_000);
+  const text = (siteText || '').slice(0, MAX_SITE_CHARS);
 
   return `You are researching whether a media outlet, blogger, YouTuber or newsletter would be a good fit to tell their audience about a new Android app.
 
@@ -110,7 +113,7 @@ App: ${app.name} — ${app.oneLiner}
 Contact: ${name}
 Website: https://${domain}
 ${desc ? `Listing blurb: ${desc}\n` : ''}
-Here is the text of their homepage (truncated to 20,000 chars):
+Here is the text of their homepage (truncated):
 ---
 ${text}
 ---
@@ -144,21 +147,26 @@ async function researchLead(lead: LeadRow, app: AppConfig): Promise<FitResult | 
     };
   }
 
-  // Quick guard: if the homepage doesn't look like media at all, skip the LLM call
+  // Quick guard: if the homepage doesn't look like media at all, or looks like a product/app store page, skip the LLM call.
   const looksMedia = LOOKS_LIKE_MEDIA.test(fetched.text.slice(0, 200_000));
-  if (!looksMedia) {
+  const looksProduct = MUST_NOT_BE.test(fetched.text.slice(0, 200_000));
+  if (!looksMedia || looksProduct) {
     return {
       sources: [url],
       summary: '',
       covers: [],
       fit: 'low',
-      fit_reason: 'Homepage does not appear to be a media outlet, blog, or creator site',
+      fit_reason: looksProduct ? 'Homepage looks like a product/app store page, not media' : 'Homepage does not appear to be a media outlet, blog, or creator site',
       hook: null,
     };
   }
 
   const prompt = makeResearchPrompt(fetched.text, lead, app);
-  const text = await apiComplete(prompt, { model: process.env.OUTREACH_CLI_MODEL || 'anthropic/claude-3.5-sonnet', maxTokens: 4096, timeoutMs: 120_000 });
+  const text = await apiComplete(prompt, {
+    model: process.env.OUTREACH_CLI_MODEL || 'google/gemini-2.0-flash-001',
+    maxTokens: 2048,
+    timeoutMs: 60_000,
+  });
   const parsed = extractJson<unknown>(text, 'object');
   if (!parsed || typeof parsed !== 'object') return null;
 
