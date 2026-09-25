@@ -6,13 +6,12 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>__HOME__/kreativekoala-outreach-harness/repo/harness/app-outreach/run_cycle.sh</string>
+    <string>__HOME__/kreativekoala-outreach-harness/repo/harness/app-outreach/qualify_cycle.sh</string>
   </array>
-  <!-- Was a 30-min StartInterval burst, to spend a large soon-expiring Claude quota
-       window across all 7 apps. That window is spent: the CLI reports "You've hit
-       your limit", so a 30-min cadence now buys ~48 failed runs/day of log noise.
-       Retired to once/day on 2026-09-25, matching the other two mini harnesses.
-       Staggered off the hour so it does not collide with their :47 runs. -->
+  <!-- Daily run at 09:13, staggered off the other two mini harnesses' :47 runs.
+       The pipeline has switched from discovery to qualification: we already have
+       95,642 leads with emails and no dossier. The only work is fetching each
+       lead's homepage + one LLM call per lead. -->
   <key>StartCalendarInterval</key>
   <dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>13</integer></dict>
   <key>RunAtLoad</key><false/>

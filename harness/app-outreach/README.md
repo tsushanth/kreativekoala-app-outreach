@@ -6,37 +6,36 @@ Leads and drafts are written into calldesktech's shared outreach tables (`produc
 so review/approve/send reuses calldesktech's existing, tested queue and guardrails:
 **review and send at https://calldesk-tech.fly.dev/admin/outreach/queue** (pick the app from the dropdown).
 
-Uses the `claude` CLI on the mini (OAuth, no API key), same as the Calldesk and SimplyApply harnesses.
+Uses the **OpenRouter API** (Claude via OpenRouter) on the mini. Set `OPENROUTER_API_KEY` in the env file.
+The old `claude` CLI fallback is still supported if the API key is absent (set `CLAUDE_BIN` if it's not on PATH).
 
 ## Control
 - Stop everything now:  `touch ~/.kreativekoala-outreach/STOP`   (resume: `rm` it)
-- Run once now:         `launchctl kickstart gui/$(id -u)/com.kreativekoala.app-outreach`
-- Run just one app:     add `OUTREACH_APP_KEY=voxkey` (see apps.json for keys) to the env file, or
-                        `OUTREACH_APP_KEY=voxkey ./node_modules/.bin/tsx harness/app-outreach/run.ts`
-- Dry run (no writes):  `set -a && . ~/.kreativekoala-outreach/env && set +a && DRY_RUN=1 ./node_modules/.bin/tsx harness/app-outreach/run.ts`
-- Logs / history:       `~/.kreativekoala-outreach/logs/`, `~/.kreativekoala-outreach/runs.jsonl`
+- Run qualify once:     `launchctl kickstart gui/$(id -u)/com.kreativekoala.app-outreach`
+- Run just one app:     add `OUTREACH_QUALIFY_APP=voxkey` to the env file
+- Dry run (no writes):  `set -a && . ~/.kreativekoala-outreach/env && set +a && DRY_RUN=1 ../../node_modules/.bin/tsx src/qualify.ts`
+- Logs / history:       `~/.kreativekoala-outreach/logs/`, `~/.kreativekoala-outreach/qualify.jsonl`
 - Uninstall:            `launchctl bootout gui/$(id -u)/com.kreativekoala.app-outreach && rm ~/Library/LaunchAgents/com.kreativekoala.app-outreach.plist`
 
 ## Burst window vs. steady state
-The plist ships set to run **hourly** (`StartInterval`), because it was set up specifically to spend a
-window of otherwise-idle Claude quota across all 7 apps at once. Once that's done, or the daily-draft
-ceiling (`OUTREACH_MAX_PENDING_DRAFTS`) is consistently hit, switch it to once a day like the other two
-mini harnesses: edit `com.kreativekoala.app-outreach.plist.template`'s `StartInterval` block to a
-`StartCalendarInterval` (see calldesktech's `harness/outreach/*.plist.template` for the exact shape),
-then rerun `setup.sh`.
+The plist is set to run **once a day** at 09:13 (`StartCalendarInterval`).
+If you want to spend quota faster, switch to `StartInterval` (e.g. 1800 for every 30 min),
+edit the plist template, then rerun `setup.sh`.
 
-## Limits (enforced in code, `src/pipeline.ts` / `harness/app-outreach/run.ts`)
-per app per run: <=6 search queries, <=15 enrichments, <=10 researched, <=2 drafted (all overridable) -
-drafting stops once `OUTREACH_MAX_PENDING_DRAFTS` (default 40, shared across every product) unreviewed
-drafts are waiting - a 45-minute deadline per run (`OUTREACH_DEADLINE_MIN`) - skips under 400 MB free
-disk - lock prevents overlapping runs - a lead/domain is never re-added or re-drafted for the same app.
+## Limits (enforced in `src/qualify.ts`)
+per run: `OUTREACH_QUALIFY_BATCH` leads (default 50, max 200) — `OUTREACH_QUALIFY_CONCURRENCY` parallel
+workers (default 4, max 8) — `OUTREACH_FETCH_TIMEOUT` per-site fetch (default 12 s, max 30 s) —
+`OUTREACH_DEADLINE_MIN` soft timeout per run (default 45 min) — skips under 400 MB free disk — lock
+prevents overlapping runs.
+
+A lead is never re-qualified: `researched_at IS NULL` is the guard. Low-fit leads are marked `dead`
+so they are never drafted.
 
 ## Env (`~/.kreativekoala-outreach/env`, chmod 600)
-`SUPABASE_URL`, `SUPABASE_SERVICE_KEY` (calldesktech's project — leads/messages land in its tables),
-optional `OUTREACH_SEARCH_QUERIES_PER_APP`, `OUTREACH_ENRICH_LIMIT_PER_APP`, `OUTREACH_RESEARCH_LIMIT_PER_APP`,
-`OUTREACH_DRAFT_LIMIT_PER_APP`, `OUTREACH_MAX_PENDING_DRAFTS`, `OUTREACH_DEADLINE_MIN`, `OUTREACH_APP_KEY`.
+`SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `OPENROUTER_API_KEY` (required — get from openrouter.ai/keys).
+Optional: `OUTREACH_QUALIFY_BATCH`, `OUTREACH_QUALIFY_CONCURRENCY`, `OUTREACH_FETCH_TIMEOUT`,
+`OUTREACH_DEADLINE_MIN`, `OUTREACH_QUALIFY_APP` (single app key), `OUTREACH_CLI_MODEL`
+(default `anthropic/claude-3.5-sonnet`).
 
-Sending needs calldesktech's Fly app to have `OUTREACH_FROM_EMAIL_KK` and `OUTREACH_POSTAL_ADDRESS_KK`
-set (Kreative Koala LLC's own sender identity and postal address) — separate from Calldesk's own
-`OUTREACH_FROM_EMAIL`/`OUTREACH_POSTAL_ADDRESS`, and separate per-product daily send cap via
-`OUTREACH_DAILY_CAP_KK` (falls back to 20/day if unset).
+If `OPENROUTER_API_KEY` is absent, the harness falls back to the `claude` CLI (set `CLAUDE_BIN` if
+it's not on PATH, e.g. `CLAUDE_BIN=/Users/you/.local/bin/claude`).
