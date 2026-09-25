@@ -11,10 +11,15 @@ The old `claude` CLI fallback is still supported if the API key is absent (set `
 
 ## Control
 - Stop everything now:  `touch ~/.kreativekoala-outreach/STOP`   (resume: `rm` it)
+- **Burst mode (research + draft, no discovery) — run this when you have quota:**
+  ```bash
+  cd ~/kreativekoala-outreach-harness/repo && harness/app-outreach/burst_cycle.sh
+  ```
+  Set `OUTREACH_BURST_DRAFT_TARGET` in env if you want more than 60 drafts per run.
 - Run qualify once:     `launchctl kickstart gui/$(id -u)/com.kreativekoala.app-outreach`
-- Run just one app:     add `OUTREACH_QUALIFY_APP=voxkey` to the env file
-- Dry run (no writes):  `set -a && . ~/.kreativekoala-outreach/env && set +a && DRY_RUN=1 ../../node_modules/.bin/tsx src/qualify.ts`
-- Logs / history:       `~/.kreativekoala-outreach/logs/`, `~/.kreativekoala-outreach/qualify.jsonl`
+- Run just one app:     add `OUTREACH_APP_KEY=voxkey` to the env file
+- Dry run (no writes):  `set -a && . ~/.kreativekoala-outreach/env && set +a && DRY_RUN=1 ../../node_modules/.bin/tsx src/burst.ts`
+- Logs / history:       `~/.kreativekoala-outreach/logs/`, `~/.kreativekoala-outreach/burst.jsonl`
 - Uninstall:            `launchctl bootout gui/$(id -u)/com.kreativekoala.app-outreach && rm ~/Library/LaunchAgents/com.kreativekoala.app-outreach.plist`
 
 ## Burst window vs. steady state
