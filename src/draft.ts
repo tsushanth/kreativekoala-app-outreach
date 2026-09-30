@@ -21,7 +21,7 @@ export interface Draft {
   body: string;
 }
 
-const SYSTEM_PROMPT = `You write short, specific, honest first-touch pitch emails from the founders of Kreative Koala LLC to press, bloggers, YouTubers, or newsletter curators, about one of the company's Android apps.
+const SYSTEM_PROMPT = `You write short, specific, honest first-touch pitch emails from the founders of KreativeKoalaSolutions LLC to press, bloggers, YouTubers, or newsletter curators, about one of the company's Android apps.
 
 Rules:
 - State ONLY the app facts given (name, one-liner, link). Never invent user counts, ratings, revenue, awards, or press coverage.
@@ -33,7 +33,7 @@ Rules:
 - Do NOT write a sign-off or signature; one is added automatically.
 - Any sentence that asks something must end with a question mark.`;
 
-export const SIGNATURE = 'Sushanth & Deepika\nKreative Koala LLC';
+export const SIGNATURE = 'Sushanth & Deepika\nKreativeKoalaSolutions LLC';
 
 export function tidyBody(body: string): string {
   const lines = body.trim().split('\n');
