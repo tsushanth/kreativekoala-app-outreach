@@ -47,8 +47,10 @@ export async function findSearchCandidates(
   const errors: string[] = [];
   let raw = 0;
   const byDomain = new Map<string, SearchCandidate>();
-  const dayNumber = Math.floor(Date.now() / 86_400_000);
-  const queries = Array.from({ length: perDay }, (_, i) => app.targeting.queries[(dayNumber + i) % app.targeting.queries.length]);
+  // Rotate the query window every 20 minutes (not once a day) so repeated runs in a burst cover different queries instead of
+  // re-running the same few; a query is never run twice within one call.
+  const slot = Math.floor(Date.now() / 1_200_000);
+  const queries = [...new Set(Array.from({ length: perDay }, (_, i) => app.targeting.queries[(slot * perDay + i) % app.targeting.queries.length]))];
 
   for (const query of queries) {
     if (shouldStop()) break;

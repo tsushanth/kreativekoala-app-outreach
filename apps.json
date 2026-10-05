@@ -10,9 +10,25 @@
       "queries": [
         "Android voice typing keyboard app review blog",
         "best speech to text keyboard Android YouTube review",
-        "accessibility voice input Android app roundup"
+        "accessibility voice input Android app roundup",
+        "Wispr Flow alternative Android voice dictation app review",
+        "best voice dictation apps for Android roundup blog",
+        "speech to text keyboard Android comparison Gboard voice typing alternatives",
+        "voice typing app productivity newsletter review",
+        "dictation app for writers ADHD dyslexia blog review",
+        "accessibility blog voice control apps RSI hands-free typing",
+        "Android productivity apps YouTube channel review voice typing",
+        "offline private speech to text keyboard Android review",
+        "AI dictation keyboard Android tech blog hands-on",
+        "voice to text apps for journalists and writers roundup",
+        "best Android keyboards review blog",
+        "hands-free typing apps Android accessibility roundup"
       ],
-      "subreddits": ["r/Android", "r/androidapps", "r/accessibility"]
+      "subreddits": [
+        "r/Android",
+        "r/androidapps",
+        "r/accessibility"
+      ]
     }
   },
   {
@@ -28,7 +44,11 @@
         "AI photo editor app YouTube review Android",
         "best free photo editing apps Android roundup"
       ],
-      "subreddits": ["r/Android", "r/androidapps", "r/mobilephotography"]
+      "subreddits": [
+        "r/Android",
+        "r/androidapps",
+        "r/mobilephotography"
+      ]
     }
   },
   {
@@ -44,7 +64,12 @@
         "best gym log app Android YouTube review",
         "fitness app roundup Android lightweight"
       ],
-      "subreddits": ["r/Android", "r/androidapps", "r/fitness", "r/bodybuilding"]
+      "subreddits": [
+        "r/Android",
+        "r/androidapps",
+        "r/fitness",
+        "r/bodybuilding"
+      ]
     }
   },
   {
@@ -63,7 +88,11 @@
         "job hunting YouTube channel app review",
         "resume and job application tools newsletter"
       ],
-      "subreddits": ["r/jobs", "r/careerguidance", "r/cscareerquestions"]
+      "subreddits": [
+        "r/jobs",
+        "r/careerguidance",
+        "r/cscareerquestions"
+      ]
     }
   },
   {
@@ -79,7 +108,11 @@
         "best note taking apps Android YouTube review",
         "productivity app roundup note taking AI"
       ],
-      "subreddits": ["r/Android", "r/androidapps", "r/productivity"]
+      "subreddits": [
+        "r/Android",
+        "r/androidapps",
+        "r/productivity"
+      ]
     }
   },
   {
@@ -95,7 +128,11 @@
         "AI meeting notes app YouTube review",
         "remote work productivity tools newsletter"
       ],
-      "subreddits": ["r/productivity", "r/androidapps", "r/remotework"]
+      "subreddits": [
+        "r/productivity",
+        "r/androidapps",
+        "r/remotework"
+      ]
     }
   },
   {
@@ -110,9 +147,25 @@
       "queries": [
         "no-code AI app builder review blog",
         "vibe coding tool YouTube review",
-        "AI app generator roundup newsletter"
+        "AI app generator roundup newsletter",
+        "vibe coding apps for beginners roundup blog",
+        "best AI app builders for non-developers comparison review",
+        "build an app with AI on your phone YouTube review",
+        "mobile AI app builder Bolt Lovable Replit alternative review",
+        "no-code AI tools weekly newsletter",
+        "AI tools for indie hackers newsletter roundup",
+        "prompt to app AI builder tech blog hands-on review",
+        "citizen developer AI app generator blog review",
+        "best AI coding apps for Android and iOS review",
+        "vibe coding YouTube creator reviews AI app builders",
+        "AI app builder directory tool listing submit",
+        "no-code community newsletter featuring new tools"
       ],
-      "subreddits": ["r/nocode", "r/artificial", "r/SideProject"]
+      "subreddits": [
+        "r/nocode",
+        "r/artificial",
+        "r/SideProject"
+      ]
     }
   }
 ]
