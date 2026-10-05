@@ -12,7 +12,8 @@ LOG="$BASE/logs/run_$(date +%Y%m%d_%H%M%S).log"
 
 [ -f "$BASE/STOP" ] && { echo "$(date) STOP file present, not running" >> "$BASE/logs/skipped.log"; exit 0; }
 
-LOCK="$BASE/lock"
+# One lock per app when OUTREACH_APP_KEY is set, so different apps can run side by side (a full run still takes the shared lock).
+LOCK="$BASE/lock${OUTREACH_APP_KEY:+-$OUTREACH_APP_KEY}"
 if ! mkdir "$LOCK" 2>/dev/null; then
   PID=$(cat "$LOCK/pid" 2>/dev/null || echo 0)
   if kill -0 "$PID" 2>/dev/null; then echo "$(date) previous run still active (pid $PID), skipping" >> "$BASE/logs/skipped.log"; exit 0; fi
