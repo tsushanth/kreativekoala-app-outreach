@@ -1,6 +1,6 @@
 import { cliComplete, extractJson } from './llm';
 import { hostOf } from './findDomain';
-import type { AppConfig } from './apps';
+import { platformNoun, type AppConfig } from './apps';
 
 // Research stage: a restricted Claude agent reads a press/creator contact's
 // own site and writes a short dossier. The dossier — and any hook drawn from
@@ -23,7 +23,7 @@ export interface ResearchInput {
   description?: string | null;
 }
 
-const PROMPT = (i: ResearchInput, app: AppConfig) => `You are researching whether a media outlet, blogger, YouTuber or newsletter would be a good fit to tell their audience about a new Android app.
+const PROMPT = (i: ResearchInput, app: AppConfig) => `You are researching whether a media outlet, blogger, YouTuber or newsletter would be a good fit to tell their audience about a new ${platformNoun(app)}.
 
 App: ${app.name} — ${app.oneLiner}
 Contact: ${i.name}
