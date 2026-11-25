@@ -203,5 +203,40 @@
         "r/SideProject"
       ]
     }
+  },
+  {
+    "key": "gaugemint",
+    "name": "Gaugemint",
+    "storeName": "Gaugemint",
+    "url": "https://gaugemint.com",
+    "platform": "web",
+    "packageId": "com.kreativekoala.gaugemint",
+    "playUrl": "https://gaugemint.com",
+    "category": "privacy-friendly web analytics",
+    "oneLiner": "Gaugemint (gaugemint.com) is simple web analytics without the cookie banner: a 2.7 KB script that sets no cookies and keeps no IP addresses, with visitors, pages, sources, countries and devices on one page, read-only keys, and a dashboard you can embed in your own admin page. The Free plan covers 3,000 events a month and 1 site, no card needed.",
+    "targeting": {
+      "queries": [
+        "privacy friendly Google Analytics alternatives roundup blog",
+        "cookieless web analytics comparison review",
+        "Plausible Fathom Simple Analytics alternatives list",
+        "website analytics for small business blog tools roundup",
+        "web analytics tools for agencies client reporting blog",
+        "indie hacker newsletter tools and stack analytics",
+        "analytics without cookie banner blog review",
+        "lightweight website analytics script review developer blog",
+        "web design agency blog tools we use analytics",
+        "freelance web developer newsletter tools for client sites",
+        "SaaS founder newsletter privacy analytics tools",
+        "developer tools newsletter new analytics tool",
+        "embedded analytics dashboard for client portal blog",
+        "best analytics tools for small websites YouTube review",
+        "marketing agency blog GDPR friendly analytics tools"
+      ],
+      "subreddits": [
+        "r/webdev",
+        "r/SaaS",
+        "r/Entrepreneur"
+      ]
+    }
   }
 ]
