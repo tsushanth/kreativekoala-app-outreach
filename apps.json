@@ -205,6 +205,40 @@
     }
   },
   {
+    "key": "tidymail",
+    "name": "TidyMail",
+    "packageId": "com.kreativekoala.tidymail",
+    "playUrl": "https://play.google.com/store/apps/details?id=com.kreativekoala.tidymail",
+    "appStoreUrl": "https://apps.apple.com/us/app/tidymail/id6756576490",
+    "category": "AI email app for iPhone and Android",
+    "oneLiner": "TidyMail is an AI email app for iPhone and Android that sorts your inbox into what needs a reply, what you are waiting on, and what is just FYI; on capable phones the sorting runs on the device, so your email stays private.",
+    "targeting": {
+      "queries": [
+        "best email apps for iPhone review blog",
+        "best email apps for Android roundup",
+        "AI email assistant apps review",
+        "Superhuman alternative email app review",
+        "inbox zero apps roundup blog",
+        "email triage app needs reply follow up app review",
+        "privacy focused email app on-device AI review",
+        "productivity newsletter email app recommendation",
+        "email management apps YouTube review channel",
+        "Gmail alternative mobile email client review",
+        "best apps to manage email overload roundup",
+        "AI inbox sorting app review blog Gmail Outlook",
+        "email app that tells you which emails need a response",
+        "productivity YouTuber email workflow inbox app review",
+        "remote work tools email management newsletter"
+      ],
+      "subreddits": [
+        "r/productivity",
+        "r/ios",
+        "r/androidapps",
+        "r/inboxzero"
+      ]
+    }
+  },
+  {
     "key": "gaugemint",
     "name": "Gaugemint",
     "storeName": "Gaugemint",
